@@ -19,6 +19,9 @@ namespace FileList
         static void Main(string[] args)
         {
 
+
+            // test
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json",false,true);
