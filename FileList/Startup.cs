@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Quartz;
+using Quartz.Impl;
+using System.Collections.Specialized;
 
 namespace FileList
 {
@@ -27,6 +29,23 @@ namespace FileList
 
             // Add our Config object so it can be injected
             services.Configure<settings>(Configuration.GetSection("MyConfig"));
+
+            services.AddSingleton(provider => GetScheduler());
+        }
+
+        private IScheduler GetScheduler()
+        {
+            var properties = new NameValueCollection
+            {
+                ["quartz.scheduler.instanceName"] = "FileList",
+                ["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool, Quartz",
+                ["quartz.threadPool.threadCount"] = "3",
+                ["quartz.jobStore.type"] = "Quartz.Simpl.RAMJobStore, Quartz",
+            };
+            var schedulerFactory = new StdSchedulerFactory();
+            var scheduler = schedulerFactory.GetScheduler().Result;
+            scheduler.Start();
+            return scheduler;
         }
     }
 }

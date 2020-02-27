@@ -17,9 +17,7 @@ namespace Services
            
             //tablica sciezek dostepu do kolejnych plikow z tego folderu
             var listFiles = Directory.GetFiles(Dir);
-            //przechowuje pojedynczy rekord z tablicy fileDirArray
 
-            //metoda szukająca właściwego ciągu znaków
             foreach (var path in listFiles)
             {
                 if (rgx.IsMatch(path))

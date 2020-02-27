@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using OfficeOpenXml;
 using Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Quartz;
 
 namespace FileList
 {
@@ -18,9 +21,6 @@ namespace FileList
         
         static void Main(string[] args)
         {
-
-
-            // test
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
